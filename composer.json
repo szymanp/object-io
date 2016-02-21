@@ -1,0 +1,34 @@
+{
+    "name": "szyman/object-io",
+    "description": "Reading and writing flat objects",
+    "homepage": "https://github.com/szymanp/object-io",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Piotr Szymanski",
+            "email": "szyman@magres.net"
+        }
+    ],
+    "require": {
+        "light/light": "dev-master",
+        "light/objectaccess": "dev-master",
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/szymanp/light"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/szymanp/light-objectaccess"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Szyman\\ObjectIO\\": "src/ObjectIO/" }
+    }
+}
