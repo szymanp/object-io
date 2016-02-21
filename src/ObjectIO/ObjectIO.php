@@ -5,6 +5,7 @@ use Light\Exception\InvalidParameterType;
 use Light\ObjectAccess\Exception\TypeException;
 use Light\ObjectAccess\Resource\Origin;
 use Light\ObjectAccess\Resource\ResolvedObject;
+use Light\ObjectAccess\Resource\ResolvedValue;
 use Light\ObjectAccess\Resource\Util\EmptyResourceAddress;
 use Light\ObjectAccess\Transaction\Util\DummyTransaction;
 use Light\ObjectAccess\Type\ComplexTypeHelper;
@@ -54,7 +55,11 @@ class ObjectIO
 			if ($property->isReadable())
 			{
 				$name = $property->getName();
-				$result->{$name} = $typeHelper->readProperty($resource, $name);
+				$value = $typeHelper->readProperty($resource, $name);
+				if ($value instanceof ResolvedValue)
+				{
+					$result->{$name} = $value->getValue();
+				}
 			}
 		}
 

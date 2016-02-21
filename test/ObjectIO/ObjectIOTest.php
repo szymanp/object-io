@@ -41,5 +41,10 @@ class ObjectIOTest extends \PHPUnit_Framework_TestCase
 		$target->whatever = "hello";
 
 		$data = $this->io->write($target);
+
+		$this->assertEquals($data->age, $target->age);
+		$this->assertEquals($data->id, $target->id);
+		$this->assertEquals($data->name, $target->name);
+		$this->assertObjectNotHasAttribute("whatever", $data);
 	}
 }
