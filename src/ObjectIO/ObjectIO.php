@@ -8,6 +8,7 @@ use Light\ObjectAccess\Resource\ResolvedObject;
 use Light\ObjectAccess\Resource\ResolvedValue;
 use Light\ObjectAccess\Resource\Util\EmptyResourceAddress;
 use Light\ObjectAccess\Transaction\Util\DummyTransaction;
+use Light\ObjectAccess\Type\Complex\CanonicalAddress;
 use Light\ObjectAccess\Type\ComplexTypeHelper;
 use Light\ObjectAccess\Type\TypeRegistry;
 
@@ -64,6 +65,32 @@ class ObjectIO
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the URL at which the given object can be accessed.
+	 *
+	 * This method always returns the canonical URL. Therefore, the ComplexType must implement the CanonicalAddress
+	 * interface.
+	 *
+	 * @param object	$target
+	 * @return string	An URL for the object, if found; otherwise, NULL.
+	 */
+	public function getUrl($target)
+	{
+		$typeHelper = $this->getTypeHelper($target);
+		$type = $typeHelper->getType();
+
+		if ($type instanceof CanonicalAddress)
+		{
+			$address = $type->getCanonicalAddress($target);
+			if ($address->hasStringForm())
+			{
+				return $address->getAsString();
+			}
+		}
+
+		return null;
 	}
 
 	/**

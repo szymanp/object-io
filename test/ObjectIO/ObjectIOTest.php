@@ -2,6 +2,7 @@
 namespace Szyman\ObjectIO;
 
 use Light\ObjectAccess\TestData\Author;
+use Light\ObjectAccess\TestData\Post;
 use Light\ObjectAccess\TestData\Setup;
 use Light\ObjectAccess\Type\TypeRegistry;
 
@@ -46,5 +47,15 @@ class ObjectIOTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($data->id, $target->id);
 		$this->assertEquals($data->name, $target->name);
 		$this->assertObjectNotHasAttribute("whatever", $data);
+	}
+
+	public function testGetUrl()
+	{
+		$target = new Post();
+		$target->setId(246);
+
+		$url = $this->io->getUrl($target);
+
+		$this->assertEquals("//post/246", $url);
 	}
 }
